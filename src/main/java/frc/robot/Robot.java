@@ -4,17 +4,8 @@
 
 package frc.robot;
 
-//import org.photonvision.PhotonCamera;
-import org.photonvision.PhotonCamera;
-import org.photonvision.targeting.PhotonPipelineResult;
-import org.photonvision.targeting.PhotonTrackedTarget;
-
-import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.AprilTagStats;
@@ -29,6 +20,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   static DigitalInput aInput;
+
+  AprilTagStats ats = new AprilTagStats();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,6 +44,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    ats.getStats(); // gets the yaw, pitch, and XYZ coords of the bot
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
