@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AprilTagStats extends SubsystemBase {
 
-  PhotonCamera frontLogi = new PhotonCamera("Front Cam");
-  PhotonCamera backLogi = new PhotonCamera("Back Cam");
+  PhotonCamera frontLogi = new PhotonCamera("Microsoft_LifeCam_HD-3000");
+  PhotonCamera backLogi = new PhotonCamera("HD_Pro_Webcam_C920");
 
-  public AprilTagStats() {} // torturous method, not even the KGB approves
+  public AprilTagStats() {}
 
-  public void periodic() {
+  public void periodic() {} // torturous method, not even the KGB approves
+
+  public void getStats() {
     PhotonPipelineResult frontResult = frontLogi.getLatestResult();
     PhotonPipelineResult backResult = backLogi.getLatestResult();
     if (frontResult.hasTargets()) { // does the image have any viable targets?
@@ -32,6 +34,7 @@ public class AprilTagStats extends SubsystemBase {
       SmartDashboard.putNumber("Front Cam Yaw", yaw);
       SmartDashboard.putNumber("Front Cam Pitch", pitch);
       SmartDashboard.putNumberArray("xyz Coordinates From Front", xyz);
+      System.out.println("this works very well!");
     }
     if (backResult.hasTargets()) { // does the image have any viable targets?
       PhotonTrackedTarget target = backResult.getBestTarget(); // if it does, get the most identifiable target
